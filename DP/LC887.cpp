@@ -1,0 +1,17 @@
+//鸡蛋掉落问题,这个是经典面试题目,一般都会问  
+//有两个鸡蛋,楼层100层,需要扔多少次,能确定临界层F.  
+//这题的状态转移方程dp[k][N]=min{max(dp[k-1][j],dp[k][N-j])+1} (1<=j<=N)
+//时间复杂度O(k*N^2)超时,因此要加上二分
+class Solution {
+public:
+    int superEggDrop(int K, int N) {
+		vector<int> dp(K + 1);
+		int res = 0;
+		for (; dp[K] < N; ++res) {
+			for (int i = K; i > 0; --i) {
+				dp[i] = dp[i] + dp[i - 1] + 1;
+			}
+		}
+		return res;
+    }
+};
